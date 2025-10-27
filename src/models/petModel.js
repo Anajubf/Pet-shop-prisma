@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 //Crio a variavél findAll e já exporto
 export const findAll = async () => {
-
+    
     return await prisma.pet.findMany({
     orderBy: { nome: 'asc' }
     });

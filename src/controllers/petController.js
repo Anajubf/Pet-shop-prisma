@@ -49,3 +49,7 @@ export const listarUm = async ( req, res ) => {
         })
     }
 }
+
+export const criar = async ( req, res) => {
+    
+}
