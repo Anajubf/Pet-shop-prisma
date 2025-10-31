@@ -6,5 +6,5 @@ CREATE TABLE "Pet" (
     "idade" INTEGER NOT NULL,
     "dono" TEXT NOT NULL,
 
-    CONSTRAINT "Pet_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Pet_db" PRIMARY KEY ("id")
 );

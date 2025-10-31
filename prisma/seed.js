@@ -10,7 +10,7 @@ async function main() {
   await prisma.pets.deleteMany();
 
   const pets = [];
-  const especies = ['Cachorro', 'Gato', 'Pássaro', 'Peixe', 'Hamster'];
+  const especies = ['Cachorro', 'Gato', 'Pássaro', 'Coelho'];
 
   for (let i = 0; i < 50; i++) { // 👈 Alterado de 20 para 50
     const especieAleatoria = faker.helpers.arrayElement(especies);
@@ -23,8 +23,8 @@ async function main() {
       nomeAleatorio = faker.animal.cat();
     } else if (especieAleatoria === 'Pássaro') {
       nomeAleatorio = faker.animal.bird();
-    } else if (especieAleatoria === 'Peixe') {
-      nomeAleatorio = faker.animal.fish();
+    } else if (especieAleatoria === 'Coelho') {
+      nomeAleatorio = faker.animal.rabbit();
     } else {
       nomeAleatorio = faker.animal.rodent();
     }
