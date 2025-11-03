@@ -1,52 +1,27 @@
 import { PrismaClient } from '@prisma/client';
-import { faker } from '@faker-js/faker';
-
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('Iniciando o seeding de 50 pets...');
+  const especies = ['Cachorro', 'Gato', 'Coelho', 'Pássaro'];
+  const nomes = ['Rex', 'Luna', 'Milo', 'Bella', 'Toby', 'Lola', 'Simba', 'Nina', 'Max', 'Chloe'];
+  const donos = ['João', 'Maria', 'Carlos', 'Ana', 'Pedro', 'Fernanda', 'Lucas', 'Juliana', 'Rafael', 'Camila'];
 
-  // Deleta todos os pets existentes para evitar duplicatas em cada execução
-  await prisma.pets.deleteMany();
-
-  const pets = [];
-  const especies = ['Cachorro', 'Gato', 'Pássaro', 'Coelho'];
-
-  for (let i = 0; i < 50; i++) { // 👈 Alterado de 20 para 50
-    const especieAleatoria = faker.helpers.arrayElement(especies);
-    let nomeAleatorio;
-
-    // Adapta o nome gerado pelo faker à espécie do pet
-    if (especieAleatoria === 'Cachorro') {
-      nomeAleatorio = faker.animal.dog();
-    } else if (especieAleatoria === 'Gato') {
-      nomeAleatorio = faker.animal.cat();
-    } else if (especieAleatoria === 'Pássaro') {
-      nomeAleatorio = faker.animal.bird();
-    } else if (especieAleatoria === 'Coelho') {
-      nomeAleatorio = faker.animal.rabbit();
-    } else {
-      nomeAleatorio = faker.animal.rodent();
-    }
-
-    pets.push({
-      nome: nomeAleatorio,
-      especie: especieAleatoria,
-      idade: faker.number.int({ min: 1, max: 15 }),
-      dono: faker.person.fullName(),
+  for (let i = 0; i < 50; i++) {
+    await prisma.pet.create({
+      data: {
+        nome: nomes[Math.floor(Math.random() * nomes.length)],
+        especie: especies[Math.floor(Math.random() * especies.length)],
+        idade: Math.floor(Math.random() * 15) + 1,
+        dono: donos[Math.floor(Math.random() * donos.length)]
+      }
     });
   }
 
-  // Cria 50 pets de uma vez no banco de dados
-  await prisma.pets.createMany({
-    data: pets,
-  });
-
-  console.log('Seeding concluído! 50 pets foram criados.');
+  console.log('50 pets criados com sucesso!');
 }
 
 main()
-  .catch(e => {
+  .catch((e) => {
     console.error(e);
     process.exit(1);
   })

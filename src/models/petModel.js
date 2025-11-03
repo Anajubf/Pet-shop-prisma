@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 //Crio a variavél findAll e já exporto
 export const findAll = async () => {
-    
+
     return await prisma.pet.findMany({
     orderBy: { nome: 'asc' }
     });
@@ -14,7 +14,7 @@ export const findById = async (id) => {
 
     return await prisma.pet.findUnique({
         where: { id: Number(id) }
-    })
+    });
 }
 
 export const create = async (data) => {
@@ -27,13 +27,13 @@ export const create = async (data) => {
             createdAt: data.createdAt,
             updatedAt: data.updatedAt
         }
-    })
+    });
 }
 
 export const deletePet = async (id) => {
     return await prisma.pet.delete({
         where: { id: Number(id) }
-    })
+    });
 }
 
 export const update = async ( id, data ) => {
@@ -45,5 +45,5 @@ export const update = async ( id, data ) => {
             ...(data.idade&& { idade: Number(data.idade)}),
             ...(data.dono&& { dono: data.dono}),
         }
-    })
+    });
 }

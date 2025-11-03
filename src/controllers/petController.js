@@ -89,7 +89,7 @@ export const apagar = async ( req, res ) => {
     try {
         const id = parseInt (req.params.id);
 
-        const petExiste = await PetsModel.findById(id);
+        const petExiste = await PetModel.findById(id);
 
         if(!petExiste) {
             return res.status(404).json({
@@ -98,7 +98,7 @@ export const apagar = async ( req, res ) => {
             })
         }
 
-        await PetsModel.deletePet(id)
+        await PetModel.deletePet(id)
 
         res.status(200).json({
             message:  'Pet removido com sucesso!',
@@ -117,9 +117,9 @@ export const atualizar = async ( req, res ) => {
     try {
         const id = parseInt(req.params.id)
 
-        const dados = req.body7
+        const dados = req.body
 
-        const petExiste = await PetsModel.findById(id);
+        const petExiste = await PetModel.findById(id);
 
         if (!petExiste) {
             return res.status(404).json({
@@ -128,9 +128,9 @@ export const atualizar = async ( req, res ) => {
             })
         }
 
-        if (dados.especie) {
+        if (dados.especies) {
             const especiesValidas = ['Cachorro', 'Gato', 'Passáro', 'Coelho'];
-            if (!especiesValidas.includes(dados.especie)) {
+            if (!especiesValidas.includes(dados.especies)) {
                 return res.status(400).json({
                     erro: 'Espécie inválida',
                     especiesValidas
@@ -138,7 +138,7 @@ export const atualizar = async ( req, res ) => {
             }
         }
 
-        const petAtualizado = await PetsModel.update(id, dados);
+        const petAtualizado = await PetModel.update(id, dados);
 
         res.status(200).json({
             message: 'Pet atualizado com sucesso',

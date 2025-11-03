@@ -8,6 +8,10 @@
     "dev": "nodemon server.js",
     "studio": "npx prisma studio"
   },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
+  
   "keywords": [
     "Pet shop",
     "Banco de dados"
